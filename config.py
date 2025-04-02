@@ -25,8 +25,8 @@ val_freq = 10
 # Dataset
 TRAIN_PATH = '/kaggle/input/steganography-imagenet/steganography_dataset_imagenet/train/'
 VAL_PATH = '/kaggle/input/steganography-imagenet/steganography_dataset_imagenet/val/'
-format_train = 'jpg'
-format_val = 'jpg'
+format_train = 'JPEG'
+format_val = 'JPEG'
 
 # Display and logging:
 loss_display_cutoff = 2.0
