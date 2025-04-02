@@ -83,7 +83,7 @@ def train_epoch(net, step, optim=None, attack_method=None, i_epoch=None, writer=
         #     loss:     #
         #################
 
-        c_loss = mse_loss(steg_img, host)
+        c_loss = mse_loss(steg_img.to(device), host)
         s_loss = mse_loss(extracted, secret)
 
         extracted = extracted.clip(0, 1)
