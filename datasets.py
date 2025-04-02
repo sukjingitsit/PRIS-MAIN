@@ -3,7 +3,6 @@ from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as T
 import config as c
-from natsort import natsorted
 
 def to_rgb(image):
     rgb_image = Image.new("RGB", image.size)
@@ -16,16 +15,16 @@ class Hinet_Dataset(Dataset):
         self.mode = mode
         if mode == 'train':
             # train
-            self.files_1 = natsorted(sorted(glob.glob(c.TRAIN_PATH + "/cover/*." + c.format_train)))
-            self.files_2 = natsorted(sorted(glob.glob(c.TRAIN_PATH + "/secret/*." + c.format_train)))
+            self.files_1 = sorted(glob.glob(c.TRAIN_PATH + "/cover/*." + c.format_train))
+            self.files_2 = sorted(glob.glob(c.TRAIN_PATH + "/secret/*." + c.format_train))
             self.files = self.files_1 + self.files_2
-            self.files = natsorted(self.files[:500])
+            self.files = self.files[:500]
         else:
             # test
             self.files_1 = sorted(glob.glob(c.VAL_PATH + "/cover/*." + c.format_val))
             self.files_2 = sorted(glob.glob(c.VAL_PATH + "/secret/*." + c.format_val))
             self.files = self.files_1 + self.files_2
-            self.files = natsorted(self.files[:500])
+            self.files = self.files[:500]
 
 
 
