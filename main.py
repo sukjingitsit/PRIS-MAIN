@@ -42,7 +42,7 @@ def embed_attack(net, input_img, attack_method):
 
     return container_img, attack_container, output_z, output_container, input_container
 
-def train_epoch(net, step, optim=None, attack_method=None, i_epoch=None, writer=None, mode='train', lam=(1.0, 1.0), device='cpu'):
+def train_epoch(net, step, optim=None, attack_method=None, i_epoch=None, writer=None, mode='train', lam=(1.0, 1.0), device='cuda'):
     r_loss_list, g_loss_list, pre_loss_list, post_loss_list, psnr_c, psnr_s, total_loss_list = [], [], [], [], [], [], []
     lam_c, lam_s = lam
     if mode != 'train':
