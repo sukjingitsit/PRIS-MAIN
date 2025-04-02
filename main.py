@@ -93,7 +93,7 @@ def train_epoch(net, step, optim=None, attack_method=None, i_epoch=None, writer=
 
         psnr_temp = computePSNR(extracted, secret)
         psnr_s.append(psnr_temp)
-        psnr_temp_c = computePSNR(host, container)
+        psnr_temp_c = computePSNR(host, container.to(device)
         psnr_c.append(psnr_temp_c)
 
         if step == 1:
