@@ -20,12 +20,11 @@ gamma = 0.5
 cropsize_val = 224
 batchsize_val = 2
 shuffle_val = False
-val_freq = 2
-
+val_freq = 10
 
 # Dataset
-TRAIN_PATH = 'steganography_dataset_flickr/train/'
-VAL_PATH = 'steganography_dataset_flickr/val/'
+TRAIN_PATH = '/kaggle/input/steganography-imagenet/steganography_dataset_imagenet/train/'
+VAL_PATH = '/kaggle/input/steganography-imagenet/steganography_dataset_imagenet/val/'
 format_train = 'jpg'
 format_val = 'jpg'
 
@@ -39,9 +38,9 @@ progress_bar = True
 
 # Saving checkpoints:
 
-MODEL_PATH = 'model/'
+MODEL_PATH = '/kaggle/working/model/'
 checkpoint_on_error = True
-SAVE_freq = 2
+SAVE_freq = 50
 
 IMAGE_PATH = 'image/'
 temp_path = "steganography_dataset_flickr/test/"
