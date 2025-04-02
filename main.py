@@ -228,7 +228,7 @@ def main(attack_method, step, load_path='', start_epoch=0, end_epoch = 1600, lam
 
 
     net, optim, weight_scheduler = model_init(step=step, load_path=load_path, load_opt=load_opt)
-    net.to("cuda")
+    net.cuda()
     visualizer = viz.Visualizer(c.loss_names)
     print("just before train")
     train(net, step, optim, weight_scheduler, attack_method, start_epoch, end_epoch, visualizer, expinfo=expinfo, lam=lam)
