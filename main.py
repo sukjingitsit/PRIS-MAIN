@@ -70,11 +70,11 @@ def train_epoch(net, step, optim=None, attack_method=None, i_epoch=None, writer=
         #################
         #   backward:   #
         #################
-        output_rev = torch.cat((input_container, output_z), 1)
+        output_rev = torch.cat((input_container, output_z), 1).to(device)
         output_image = net(output_rev, rev=True)
         extracted = output_image.narrow(1, 4 * c.channels_in,
                                          output_image.shape[1] - 4 * c.channels_in)
-        extracted = iwt(extracted)
+        extracted = iwt(extracted).to(device)
         if step == 1 or step == 2:
             extracted = net.post_enhance(extracted)
 
