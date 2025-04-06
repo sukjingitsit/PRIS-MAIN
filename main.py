@@ -139,7 +139,11 @@ def train(net, step, optim, weight_scheduler, attack_method, start_epoch, end_ep
     val_loss = train_epoch(net, step, optim, attack_method, start_epoch, mode='val', writer=writer, lam=lam)
     print("val epoch done")
     for i_epoch in range(start_epoch + 1, end_epoch + 1):
-
+        if (i_epoch > c.SAVE_freq) and (i_epoch%c.SAVE_freq == 1):
+            t_i = i_epoch-1
+            net, optim = load(net, optim, c.MODEL_PATH + 'model_checkpoint_%.5i' % t_i + 'step_%.5i' % step + '.pt', True)
+            print("loaded from ", c.MODEL_PATH + 'model_checkpoint_%.5i' % i_epoch + 'step_%.5i' % step + '.pt')
+            
         #################
         #     train:    #
         #################
@@ -160,7 +164,7 @@ def train(net, step, optim, weight_scheduler, attack_method, start_epoch, end_ep
 
         if i_epoch > 0 and (i_epoch % c.SAVE_freq) == 0:
             torch.save({'opt': optim.state_dict(),
-                        'net': net.state_dict()}, c.MODEL_PATH + 'model_checkpoint_%.5i' % i_epoch + '.pt')
+                        'net': net.state_dict()}, c.MODEL_PATH + 'model_checkpoint_%.5i' % i_epoch + 'step_%.5i' % step + '.pt')
 
         weight_scheduler.step()
 
@@ -235,8 +239,3 @@ def main(attack_method, step, load_path='', start_epoch=0, end_epoch = 1600, lam
     #train_epoch(net, attack_method=attack_method, mode='test', step=step)
     #print("test epoch done")
     #calculate_PSNR_SSIM.main(f'{expinfo}')
-
-
-
-
-
