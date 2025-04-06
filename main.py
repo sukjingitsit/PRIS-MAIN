@@ -238,14 +238,5 @@ def main(attack_method, step, load_path='', start_epoch=0, end_epoch = 1600, lam
 
 
 
-if __name__ == '__main__':
-    attack_method = 'gaussian10'
-    lambda_c = 1.0
-    lambda_s = 1.0
-    lam = (lambda_c, lambda_s)
-    for step in range(3):
-        main(attack_method, step, start_epoch=0, end_epoch=1600, lam=lam)
-
-
 
 
