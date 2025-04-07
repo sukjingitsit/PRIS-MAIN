@@ -51,7 +51,6 @@ def train_epoch(net, step, optim=None, attack_method=None, i_epoch=None, writer=
     else:
         dataloader = datasets.trainloader
         net.train()
-    print("epoch in progress")
     for i_batch, data in enumerate(dataloader):
         data = data.to(device)
         num = data.shape[0] // 2
@@ -122,7 +121,6 @@ def train_epoch(net, step, optim=None, attack_method=None, i_epoch=None, writer=
         before = 'val_'
     else:
         before = ''
-    print("epoch completed")
     if mode != 'test':
         writer.add_scalars(f"{before}c_loss", {f"{before}guide loss": np.mean(g_loss_list)}, i_epoch)
         writer.add_scalars(f"{before}s_loss", {f"{before}rev loss": np.mean(r_loss_list)}, i_epoch)
@@ -137,7 +135,6 @@ def train(net, step, optim, weight_scheduler, attack_method, start_epoch, end_ep
 
     writer = SummaryWriter(comment=expinfo, filename_suffix="steg")
     val_loss = train_epoch(net, step, optim, attack_method, start_epoch, mode='val', writer=writer, lam=lam)
-    print("val epoch done")
     for i_epoch in range(start_epoch + 1, end_epoch + 1):
         if (i_epoch > c.SAVE_freq) and (i_epoch%c.SAVE_freq == 1):
             t_i = i_epoch-1
@@ -148,7 +145,6 @@ def train(net, step, optim, weight_scheduler, attack_method, start_epoch, end_ep
         #     train:    #
         #################
         train_loss = train_epoch(net, step, optim, attack_method, i_epoch, writer=writer, lam=lam)
-        print("train epoch done")
 
         #################
         #     val:    #
@@ -156,7 +152,6 @@ def train(net, step, optim, weight_scheduler, attack_method, start_epoch, end_ep
         if i_epoch % c.val_freq == 0:
             with torch.no_grad():
                 val_loss = train_epoch(net, step, optim, attack_method, i_epoch, mode='val', writer=writer, lam=lam)
-                print("val epoch done")
 
         info = [np.round(train_loss, 2), np.round(val_loss, 2), np.round(np.log10(optim.param_groups[0]['lr']), 2), attack_method]
 
@@ -165,6 +160,7 @@ def train(net, step, optim, weight_scheduler, attack_method, start_epoch, end_ep
         if i_epoch > 0 and (i_epoch % c.SAVE_freq) == 0:
             torch.save({'opt': optim.state_dict(),
                         'net': net.state_dict()}, c.MODEL_PATH + 'model_checkpoint_%.5i' % i_epoch + 'step_%.5i' % step + '.pt')
+            print("saved at ", c.MODEL_PATH + 'model_checkpoint_%.5i' % i_epoch + 'step_%.5i' % step + '.pt')
 
         weight_scheduler.step()
 
