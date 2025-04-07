@@ -142,7 +142,7 @@ def train(net, step, optim, weight_scheduler, attack_method, start_epoch, end_ep
         if (i_epoch > c.SAVE_freq) and (i_epoch%c.SAVE_freq == 1):
             t_i = i_epoch-1
             net, optim = load(net, optim, c.MODEL_PATH + 'model_checkpoint_%.5i' % t_i + 'step_%.5i' % step + '.pt', True)
-            print("loaded from ", c.MODEL_PATH + 'model_checkpoint_%.5i' % i_epoch + 'step_%.5i' % step + '.pt')
+            print("loaded from ", c.MODEL_PATH + 'model_checkpoint_%.5i' % t_i + 'step_%.5i' % step + '.pt')
             
         #################
         #     train:    #
