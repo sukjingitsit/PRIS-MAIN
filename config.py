@@ -40,7 +40,7 @@ progress_bar = True
 
 MODEL_PATH = '/kaggle/working/model/'
 checkpoint_on_error = True
-SAVE_freq = 2
+SAVE_freq = 50
 
 IMAGE_PATH = 'image/'
 temp_path = "steganography_dataset_flickr/test/"
