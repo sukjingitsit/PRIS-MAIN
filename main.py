@@ -63,8 +63,8 @@ def train_epoch(net, step, optim=None, attack_method=None, i_epoch=None, writer=
         steg_img, attack_container, output_z, output_container, input_container = embed_attack(net, input_img, attack_method)
 
         if step == 1 or step == 2:
-            input_container = net.pre_enhance(attack_container)
-            input_container = dwt(input_container)
+            input_container = net.pre_enhance(attack_container.to("cuda"))
+            input_container = dwt(input_container).to("cuda")
 
         #################
         #   backward:   #
@@ -243,6 +243,6 @@ if __name__ == '__main__':
     lam = (lambda_c, lambda_s)
     for step in range(3):
         if step == 0:
-            main(attack_method, step, start_epoch=900, end_epoch=1600, lam=lam)
+            continue
         else:
             main(attack_method, step, start_epoch=0, end_epoch=1600, lam=lam)
