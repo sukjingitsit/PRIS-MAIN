@@ -244,7 +244,7 @@ if __name__ == '__main__':
     for step in range(3):
         if step == 0:
             continue
-        else if step == 1:
+        elif step == 1:
             main(attack_method, step, start_epoch=1350, end_epoch=1600, lam=lam)
-        else if step == 2:
+        elif step == 2:
             main(attack_method, step, start_epoch=0, end_epoch=1600, lam=lam)
