@@ -245,6 +245,6 @@ if __name__ == '__main__':
         if step == 0:
             continue
         elif step == 1:
-            main(attack_method, step, start_epoch=1350, end_epoch=1600, lam=lam)
+            continue
         elif step == 2:
-            main(attack_method, step, start_epoch=0, end_epoch=1600, lam=lam)
+            main(attack_method, step, start_epoch=750, end_epoch=1600, lam=lam)
