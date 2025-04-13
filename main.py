@@ -242,9 +242,4 @@ if __name__ == '__main__':
     lambda_s = 1.0
     lam = (lambda_c, lambda_s)
     for step in range(3):
-        if step == 0:
-            continue
-        elif step == 1:
-            continue
-        elif step == 2:
-            main(attack_method, step, start_epoch=750, end_epoch=1600, lam=lam)
+        main(attack_method, step, start_epoch=0, end_epoch=1600, lam=lam)
